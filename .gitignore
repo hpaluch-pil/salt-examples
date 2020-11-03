@@ -1,0 +1,8 @@
+# vim backup files
+*~
+*.swp
+*.tmp
+# common backup files
+*.bak
+*.orig
+
