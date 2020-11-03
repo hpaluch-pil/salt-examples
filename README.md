@@ -8,6 +8,10 @@ Currently there is:
   - Debian (tested version 10)
   - RHEL/CentOS (tested version 7)
   - openSUSE LEAP (tested version 15.2)
+- `srv/salt/pil-docker.sls` - State `pil-docker` that will add Docker key/repo and install
+  packages. Currently works on:
+  - Debian 10 only
+  
 
 ## Setup
 
