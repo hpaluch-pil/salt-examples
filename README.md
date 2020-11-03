@@ -12,7 +12,9 @@ Currently there is:
 ## Setup
 
 You need to have working salt-stack installed. See https://repo.saltstack.com/
-for installation instructions.
+for installation instructions. Also
+https://docs.saltstack.com/en/latest/topics/tutorials/walkthrough.html could be
+helpful.
 
 Then use standard command to checkout this repository - non-privileged user/folder
 recommended:
@@ -49,7 +51,7 @@ To run `pil-vim` SLS over SSH (without need for Minion agent) use this:
 # copy Master SSH key to your USER@TARGET_IP via SSH
 sudo ssh-copy-id -i /etc/salt/pki/master/ssh/salt-ssh.rsa.pub USER@TARGET_IP
 # now you can run "pil-vim" sls on SSH target using
-sudo salt-ssh -i --user=USER TARGET state.apply pil-vim
+sudo salt-ssh -i --user=USER TARGET_IP state.apply pil-vim
 ```
 
 To run our `pil-vim` SLS locally (no running Master and/or Minion needed) use this command:
