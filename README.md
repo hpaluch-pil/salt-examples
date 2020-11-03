@@ -27,7 +27,7 @@ cd salt-examples
 Now create default Salt directory for SLS and copy our files there:
 ```bash
 sudo mkdir -p /srv/salt/
-sudo cp -v srv/salt/* /src/salt
+sudo cp -v srv/salt/* /srv/salt
 ```
 
 Now you are ready to proceed to next section:
@@ -57,9 +57,4 @@ To run our `pil-vim` SLS locally (no running Master and/or Minion needed) use th
 ```bash
 sudo salt-call --local state.apply pil-vim
 ```
-
-
-
-
-
 
