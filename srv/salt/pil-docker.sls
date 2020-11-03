@@ -18,8 +18,10 @@ pil-docker-org-repo:
     - keyid: 0EBFCD88
     - keyserver: hkp://keyserver.ubuntu.com:80
     - refresh: true
-    # pkg require does not work. See docs...
+    # pkg require does not work. This is _reverse_ dependency...
     - require_in: pil-docker-pkgs
+    - require:
+      - pkg: pil-docker-pre-pkgs
 
 pil-docker-pkgs:
   pkg.installed:
