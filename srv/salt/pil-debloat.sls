@@ -2,15 +2,21 @@
 #
 # DANGEROUS! EXPERIMENTAL!
 #
-{% if grains['os_family']|lower == 'debian' %}
+{% if grains['os_family']|lower in ['debian','suse','redhat'] %}
 
-{#  list of packages to be removed on all Debian like distributions #}
-{%  set drop_pkgs = [ 'unattended-upgrades','irqbalance' ] %}
-{%  if grains['os']|lower == 'ubuntu' %}
-{#   add Ubuntu specific packages for removal #}
-{%   for upkg in ['snapd','command-not-found','javascript-common'] %}
-{%    do drop_pkgs.append( upkg ) %}
-{%   endfor %}
+{%  if grains['os_family']|lower == 'debian' %}
+{#   list of packages to be removed on all Debian like distributions #}
+{%   set drop_pkgs = [ 'unattended-upgrades','irqbalance' ] %}
+{%   if grains['os']|lower == 'ubuntu' %}
+{#    add Ubuntu specific packages for removal #}
+{%    for upkg in ['snapd','command-not-found','javascript-common'] %}
+{%     do drop_pkgs.append( upkg ) %}
+{%    endfor %}
+{%   endif %}
+{%  elif grains['os_family']|lower == 'suse' %}
+{%   set drop_pkgs = [ 'yp-tools','irqbalance','parallel-printer-support' ] %}
+{%  elif grains['os_family']|lower == 'redhat' %}
+{%   set drop_pkgs = [ 'tuned','irqbalance' ] %}
 {%  endif %}
 
 {% for pkg in drop_pkgs %}
