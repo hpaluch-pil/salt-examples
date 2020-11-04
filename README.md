@@ -14,6 +14,7 @@ Currently there is:
   - Debian 10 only
   - MAY work on Ubuntu 20.04 (focal), but NOT on 20.10 (groovy), because
     there is no Docker repository for 20.10 yet - 2020-11-04
+  - RHEL/CentOS (tested version 7)
 
 ## Setup
 
