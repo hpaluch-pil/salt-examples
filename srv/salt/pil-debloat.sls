@@ -5,7 +5,7 @@
 {% if grains['os_family']|lower == 'debian' %}
 
 {#  list of packages to be removed on all Debian like distributions #}
-{%  set drop_pkgs = [ 'unattended-upgrades' ] %}
+{%  set drop_pkgs = [ 'unattended-upgrades','irqbalance' ] %}
 {%  if grains['os']|lower == 'ubuntu' %}
 {#   add Ubuntu specific packages for removal #}
 {%   for upkg in ['snapd','command-not-found','javascript-common'] %}
