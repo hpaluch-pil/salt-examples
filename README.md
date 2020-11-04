@@ -41,7 +41,8 @@ base:
 ```
 
 Above example will add `user1` and `user2` to `docker` group on
-all Minions where `pil-docker` state was applied.
+all Minions where `pil-docker` state was applied, for example
+using command `sudo salt '*' state.apply pil-docker`.
 
 ## Setup
 
@@ -50,8 +51,8 @@ for installation instructions. Also
 https://docs.saltstack.com/en/latest/topics/tutorials/walkthrough.html could be
 helpful.
 
-Then use standard command to checkout this repository - non-privileged user/folder
-recommended:
+Then use standard command to checkout this repository - non-privileged
+user/folder recommended:
 
 ```bash
 mkdir ~/projects
@@ -95,6 +96,7 @@ sudo salt-call --local state.apply pil-vim
 ```
 
 Similarly you can apply `pil-docker` state - just replace `pil-vim` with
-`pil-docker`.
+`pil-docker`. But be warned that `pil-docker` was tested only using regular
+Minions (using `sudo salt '*' state.apply pil-docker` command).
 
 
