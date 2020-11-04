@@ -15,6 +15,8 @@ Currently there is:
   - MAY work on Ubuntu 20.04 (focal), but NOT on 20.10 (groovy), because
     there is no Docker repository for 20.10 yet - as of 2020-11-04
   - RHEL/CentOS (tested version 7)
+  - openSUSE LEAP (tested version 15.2) - however under SUSE we use
+    just stock `docker` package from standard SUSE repo
 
 ## Setup
 
