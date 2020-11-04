@@ -6,12 +6,14 @@ Currently there is:
 - `srv/salt/pil-vim.sls` - State `pil-vim` that will install text-mode vim on
   any of:
   - Debian (tested version 10)
+  - Ubuntu (tested version 20.10)
   - RHEL/CentOS (tested version 7)
   - openSUSE LEAP (tested version 15.2)
 - `srv/salt/pil-docker.sls` - State `pil-docker` that will add Docker key/repo and install
   packages. Currently works on:
   - Debian 10 only
-  
+  - MAY work on Ubuntu 20.04 (focal), but NOT on 20.10 (groovy), because
+    there is no Docker repository for 20.10 yet - 2020-11-04
 
 ## Setup
 

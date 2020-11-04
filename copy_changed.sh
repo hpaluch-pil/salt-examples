@@ -4,7 +4,7 @@ set -e
 set -o pipefail
 cd `dirname $0`
 
-for i in srv/*/*.sls
+for i in `find srv -type f -name \*.sls`
 do
 	src="$i"
 	[ -f "/$src" ] || {
