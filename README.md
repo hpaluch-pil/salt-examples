@@ -9,14 +9,39 @@ Currently there is:
   - Ubuntu (tested version 20.10)
   - RHEL/CentOS (tested version 7)
   - openSUSE LEAP (tested version 15.2)
-- `srv/salt/pil-docker.sls` - State `pil-docker` that will add Docker key/repo and install
-  packages. Currently works on:
+- `srv/salt/pil-docker.sls` - State `pil-docker` that will add Docker key/repo and install docker packages. Currently works on:
   - Debian 10 only
   - MAY work on Ubuntu 20.04 (focal), but NOT on 20.10 (groovy), because
     there is no Docker repository for 20.10 yet - as of 2020-11-04
   - RHEL/CentOS (tested version 7)
   - openSUSE LEAP (tested version 15.2) - however under SUSE we use
     just stock `docker` package from standard SUSE repo
+
+NOTE: `docker-pil` SLS also supports Pillar variable `pil-docker-users` of
+type `list` - list of users to be added to group `docker` (so they can
+invoke any docker function without root access).
+
+For example you can create Pillar file `/srv/pillar/custom-pil-docker.sls`
+with contents like:
+
+```yaml
+# custom-pil-docker.sls
+pil-docker-users:
+  - user1
+  - user2
+```
+
+And add this to your Top pillar file `/srv/pillar/top.sls`:
+
+```yaml
+# /srv/pillar/top.sls
+base:
+  '*':
+    - custom-pil-docker
+```
+
+Above example will add `user1` and `user2` to `docker` group on
+all Minions where `pil-docker` state was applied.
 
 ## Setup
 
@@ -46,7 +71,7 @@ Now you are ready to proceed to next section:
 
 ## Running our SLS
 
-To run `pil-vim` SLS on all Minions:
+To run `pil-vim` state on all Minions:
 
 ```bash
 # dry-run
@@ -68,4 +93,8 @@ To run our `pil-vim` SLS locally (no running Master and/or Minion needed) use th
 ```bash
 sudo salt-call --local state.apply pil-vim
 ```
+
+Similarly you can apply `pil-docker` state - just replace `pil-vim` with
+`pil-docker`.
+
 

@@ -6,6 +6,15 @@ include:
   - pil-docker.{{ grains['os_family']|lower }}
 
 # parts common to all distributions
+# add selected users from Pillar 'pil-docker-users' to group 'docker'
+{% if pillar.get('pil-docker-users',[]) %}
+pil-add-docker-users:
+  group.present:
+    - addusers: {{ pillar['pil-docker-users'] }}
+    - require:
+      - pkg: pil-docker-pkgs
+{% endif %}
+
 # typically RedHat and Ubuntu have everything disabled by default???
 pil-docker-enabled:
   service.enabled:
