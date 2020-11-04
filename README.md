@@ -9,6 +9,9 @@ Currently there is:
   - Ubuntu (tested version 20.10)
   - RHEL/CentOS (tested version 7)
   - openSUSE LEAP (tested version 15.2)
+- `srv/salt/pil-debloat.sls` - state that will remove bloat from Ubuntu/Debian
+  - WARNING! DANGEROUS AND EXPERIMENTAL!
+  - use this `pil-debloat` state very carefully!
 - `srv/salt/pil-docker.sls` - State `pil-docker` that will add Docker key/repo and install docker packages. Currently works on:
   - Debian 10 only
   - MAY work on Ubuntu 20.04 (focal), but NOT on 20.10 (groovy), because
