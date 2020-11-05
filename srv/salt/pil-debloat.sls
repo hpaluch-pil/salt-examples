@@ -6,12 +6,11 @@
 
 {%  if grains['os_family']|lower == 'debian' %}
 {#   list of packages to be removed on all Debian like distributions #}
-{%   set drop_pkgs = [ 'unattended-upgrades','irqbalance' ] %}
+{%   set drop_pkgs = [ 'unattended-upgrades','irqbalance','multipath-tools' ] %}
 {%   if grains['os']|lower == 'ubuntu' %}
 {#    add Ubuntu specific packages for removal #}
-{%    for upkg in ['snapd','command-not-found','javascript-common','motd-news-config'] %}
-{%     do drop_pkgs.append( upkg ) %}
-{%    endfor %}
+{%    set drop_pkgs = drop_pkgs + ['snapd','command-not-found','javascript-common',
+            'motd-news-config','alsa-topology-conf','alsa-ucm-conf']  %}
 {%   endif %}
 {%  elif grains['os_family']|lower == 'suse' %}
 {%   set drop_pkgs = [ 'yp-tools','irqbalance','parallel-printer-support' ] %}
