@@ -10,7 +10,7 @@
 {#   list of packages to be removed on all Debian like distributions #}
 {%   set drop_pkgs = drop_pkgs + [ 'unattended-upgrades','multipath-tools',
           'upower','fwupd','fwupd-signed','bcache-tools','usbmuxd',
-          'mtr-tiny','open-iscsi' ] %}
+          'mtr-tiny','open-iscsi','pastebinit' ] %}
 {%   if grains['os']|lower == 'ubuntu' %}
 {#    add Ubuntu specific packages for removal #}
 {%    set drop_pkgs = drop_pkgs + ['snapd','command-not-found','javascript-common',
