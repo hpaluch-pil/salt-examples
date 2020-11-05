@@ -50,6 +50,16 @@ pil-debloat-{{ unit }}-masked:
     - name: {{ unit }}
 {% endfor %}
 
+{# comment out /run/motd.dynamic crap #}
+{% if grains['os_family']|lower == 'debian' %}
+{%  for pam_file in ['login','sshd'] %}
+pil-debloat-disable-{{ pam_file }}-motd:
+  file.comment:
+    - name: "/etc/pam.d/{{ pam_file }}"
+    - regex: "^(session.*motd=/run/motd.dynamic.*)"
+{%  endfor %}
+{% endif %}
+
 {% else %}
 pil-debloat-failure:
   test.fail_without_changes:
