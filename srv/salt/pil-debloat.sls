@@ -3,19 +3,24 @@
 # DANGEROUS! EXPERIMENTAL!
 #
 {% if grains['os_family']|lower in ['debian','suse','redhat'] %}
+{#  bloat common to all distribution #}
+{%  set drop_pkgs = [ 'irqbalance', 'tuned' ] %}
 
 {%  if grains['os_family']|lower == 'debian' %}
 {#   list of packages to be removed on all Debian like distributions #}
-{%   set drop_pkgs = [ 'unattended-upgrades','irqbalance','multipath-tools' ] %}
+{%   set drop_pkgs = drop_pkgs + [ 'unattended-upgrades','multipath-tools',
+          'upower','fwupd','fwupd-signed','bcache-tools','usbmuxd',
+          'mtr-tiny','open-iscsi' ] %}
 {%   if grains['os']|lower == 'ubuntu' %}
 {#    add Ubuntu specific packages for removal #}
 {%    set drop_pkgs = drop_pkgs + ['snapd','command-not-found','javascript-common',
-            'motd-news-config','alsa-topology-conf','alsa-ucm-conf']  %}
+            'motd-news-config','alsa-topology-conf','alsa-ucm-conf',
+            'apport','apport-symptoms' ]  %}
 {%   endif %}
 {%  elif grains['os_family']|lower == 'suse' %}
-{%   set drop_pkgs = [ 'yp-tools','irqbalance','parallel-printer-support' ] %}
+{%   set drop_pkgs = drop_pkgs + [ 'yp-tools','parallel-printer-support' ] %}
 {%  elif grains['os_family']|lower == 'redhat' %}
-{%   set drop_pkgs = [ 'tuned','irqbalance' ] %}
+{%   set drop_pkgs = drop_pkgs + [ 'teamd' ] %}
 {%  endif %}
 
 {% for pkg in drop_pkgs %}
