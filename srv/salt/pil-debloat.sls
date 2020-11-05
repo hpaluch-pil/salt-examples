@@ -9,7 +9,7 @@
 {%   set drop_pkgs = [ 'unattended-upgrades','irqbalance' ] %}
 {%   if grains['os']|lower == 'ubuntu' %}
 {#    add Ubuntu specific packages for removal #}
-{%    for upkg in ['snapd','command-not-found','javascript-common'] %}
+{%    for upkg in ['snapd','command-not-found','javascript-common','motd-news-config'] %}
 {%     do drop_pkgs.append( upkg ) %}
 {%    endfor %}
 {%   endif %}
@@ -33,6 +33,23 @@ pil-debloat-{{ pkg }}-pkg:
 #      - pkg: pil-debloat-{{ pkg }}-pkg
 
 {%  endfor %}
+
+{# mask listed systemd units #}
+{% set masked_units = [] %}
+{% if grains['os_family']|lower == 'debian' %}
+{%  set masked_units = masked_units + ['apt-daily.timer','apt-daily-upgrade.timer'] %}
+{% endif %}
+{% if grains['os']|lower == 'ubuntu' %}
+{%  set masked_units = masked_units + ['update-notifier-download.timer',
+          'fwupd-refresh.timer','motd-news.timer','update-notifier-motd.timer'] %}
+{% endif %}
+
+{% for unit in masked_units %}
+pil-debloat-{{ unit }}-masked:
+  service.masked:
+    - name: {{ unit }}
+{% endfor %}
+
 {% else %}
 pil-debloat-failure:
   test.fail_without_changes:
